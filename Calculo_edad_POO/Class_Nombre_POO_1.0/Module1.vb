@@ -3,10 +3,8 @@ Module Module1
 
     Sub Main()
         'Zona de declaración de nuevas variables y clases
-        Dim person, personborndate As Person
+        Dim person As Person
         person = New Person
-        Dim personNameStr, personborndateStr As String
-        Dim personYearsOld, personDaysOld, personHoursOld, personMinutesOld As Long
 
         'IPuerta de entrada
         Console.ForegroundColor = ConsoleColor.DarkBlue
@@ -25,7 +23,7 @@ Module Module1
         Console.WriteLine()
         Console.Write("==================================================================================================================")
         Console.WriteLine()
-        Console.Write("||Este programa pedira su nombre y fecha de nacimiento. Con ello realizara calculos que se expondran en pantalla||")
+        Console.Write("||Este programa pedira tu nombre y fecha de nacimiento. Con ello realizara calculos que se expondran en pantalla||")
         Console.WriteLine()
         Console.Write("==================================================================================================================")
         Console.WriteLine()
@@ -33,31 +31,25 @@ Module Module1
         Console.ForegroundColor = ConsoleColor.DarkYellow
         Console.Write("Introduce tu nombre: ")
         Console.ForegroundColor = ConsoleColor.DarkCyan
-        personNameStr = Console.ReadLine()
+        person.PerName = Console.ReadLine()
         Console.WriteLine()
         Console.ForegroundColor = ConsoleColor.DarkYellow
-        Console.Write("Introduce tu fecha de nacimiento: ")
-        Console.ForegroundColor = ConsoleColor.DarkCyan
-        personborndateStr = Console.ReadLine()
-        Console.WriteLine()
 
-        '2 de agosto de 2001
-        If Date.TryParse(personborndateStr, person.PerBornDate) Then
-            personYearsOld = DateDiff(DateInterval.Year, person.PerBornDate, Date.Now)
+        Try
+            Console.Write("Introduce tu fecha de nacimiento: ")
+            Console.ForegroundColor = ConsoleColor.DarkCyan
+            person.dob = Console.ReadLine()
+            Console.WriteLine()
             Console.ForegroundColor = ConsoleColor.Green
-            Console.Write("--->" & personNameStr & " tienes " & personYearsOld & " años")
+            Console.WriteLine("--->" & person.PerName & " tienes " & person.age)
+            Console.WriteLine("--->tienes " & person.months & " meses")
+            Console.Write("--->En días tienes " & person.days & " días")
             Console.WriteLine()
-            personDaysOld = DateDiff(DateInterval.Day, person.PerBornDate, Date.Now)
-            Console.Write("--->En días tienes " & personDaysOld & " días")
+            Console.Write("--->En horas tienes " & person.hours & " horas")
             Console.WriteLine()
-            personHoursOld = DateDiff(DateInterval.Hour, person.PerBornDate, Date.Now)
-            Console.Write("--->En horas tienes " & personHoursOld & " horas")
+            Console.Write("--->En minutos tienes " & person.minutes & " minutos")
             Console.WriteLine()
-            personMinutesOld = DateDiff(DateInterval.Minute, person.PerBornDate, Date.Now)
-            Console.Write("--->En minutos tienes " & personMinutesOld & " minutos")
-            Console.WriteLine()
-
-        Else
+        Catch ex As Exception
             Console.ForegroundColor = ConsoleColor.DarkRed
             Console.Write("El valor introducido para 'Fecha de naciemiento' no esta admitido por el sistema")
             Console.ForegroundColor = ConsoleColor.DarkRed
@@ -66,8 +58,7 @@ Module Module1
             Console.Write("[Pulsa cualquier tecla para salir]---->")
             Console.ReadKey()
             Exit Sub
-        End If
-
+        End Try
 
         'Sistema de cierre de la consola
         Console.ForegroundColor = ConsoleColor.DarkRed
